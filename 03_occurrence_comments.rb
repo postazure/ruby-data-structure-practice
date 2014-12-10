@@ -1,4 +1,5 @@
 require 'pp'
+require_relative 'curriculum'
 
 # Require json and parse the json file
 #
@@ -27,3 +28,17 @@ require 'pp'
 #       g4 on 2013-05-08 - 0
 #       g5 on 2013-06-08 - 0
 #       etc...
+
+CURRICULUM[:units].each do |unit|
+  puts unit[:name]
+  unit[:lessons].each do |lesson|
+    puts "  #{lesson[:name]}"
+    lesson[:occurrences].each do |occurrence|
+      print "    #{occurrence.last[:cohort][:name]}"
+      print " on "
+      print "#{occurrence.first}"
+      print " - "
+      puts occurrence.last[:comments].count
+    end
+  end
+end
